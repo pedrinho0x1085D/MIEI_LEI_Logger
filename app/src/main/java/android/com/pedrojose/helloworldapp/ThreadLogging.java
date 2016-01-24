@@ -22,6 +22,7 @@ public class ThreadLogging implements LocationListener {
     private int velocidadeTotal,leituras;
     private int distSubida;
     private int distDescida;
+    private int totDistance;
     private RecordMap recordMap;
     LoggingAct loggingAct;
     private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 150; // in Meters
@@ -31,9 +32,10 @@ public class ThreadLogging implements LocationListener {
     public ThreadLogging(User u, float carga, String modal, LoggingAct loggingAct, RecordMap rm) {
         this.u = u;
         this.loggingAct = loggingAct;
+
         this.carga = carga;
         this.modal = modal;
-        this.velocidadeTotal=leituras=distSubida=distDescida=0;
+        this.velocidadeTotal=leituras=distSubida=distDescida=totDistance=0;
         this.recordMap = rm;
         locationManager = (LocationManager) loggingAct.getSystemService(Context.LOCATION_SERVICE);
         PackageManager pm = loggingAct.getPackageManager();
@@ -68,12 +70,14 @@ public class ThreadLogging implements LocationListener {
             float media=(float)velocidadeTotal/leituras;
             if(starting.getAltitude()<location.getAltitude()) distSubida+=starting.distanceTo(location);
             if(starting.getAltitude()>location.getAltitude()) distDescida+=starting.distanceTo(location);
-            recordMap.addRecord(new Record(starting,location,media,location.getSpeed(),distSubida,distDescida,loggingAct.getDiffic(),this.u,carga,modal));
+            totDistance+=starting.distanceTo(location);
+            recordMap.addRecord(new Record(starting,location,media,location.getSpeed(),distSubida,distDescida,totDistance,loggingAct.getDiffic(),this.u,carga,modal));
             this.loggingAct.updateLatLonAl(location.getLatitude(),location.getLongitude(),location.getAltitude());
             starting=location;
         }
         //location.getSpeed() metros por segundo
         //location.getAltitude() metros
+		//distanciaTotalPercorrida
 
     }
 

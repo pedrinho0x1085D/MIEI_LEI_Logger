@@ -45,7 +45,7 @@ public class RecordMap {
     // to csv file!
     public ArrayList<String> CSVFormat(){
         ArrayList<String> lines = new ArrayList<>();
-        String header="username, datetime, age, height, weight, hasSportHistoric, hasWalkingHistoric, gender, startLat, startLon, startAlt, endLat, endLon, endAlt, dist, altdiff, currSpd, avgSpd, accumSub, accumDesc, modal, load, diffic"+"\n";
+        String header="username, datetime, age, height, weight, hasSportHistoric, hasWalkingHistoric, gender, startLat, startLon, startAlt, endLat, endLon, endAlt, dist, altdiff, currSpd, avgSpd, accumSub, accumDesc, totDist, modal, load, diffic"+"\n";
         lines.add(header);
         for(Record r: this.mapa.values())
             lines.add(r.formatCSV());

@@ -14,14 +14,14 @@ public class Record implements Serializable{
     private Location start, end;
     private float avgSpd;
     private float currSpeed;
-    private int accumSub, accumDesc;
+    private int accumSub, accumDesc,totDistance;
     private String diffic;
     private String modal;
     private User user;
     private float carga;
     private GregorianCalendar date;
 
-    public Record(Location start, Location end,float avgSpd, float currSpeed, int accumSub,int accumDesc,String diffic,User user, float carga,String modal){
+    public Record(Location start, Location end,float avgSpd, float currSpeed, int accumSub,int accumDesc,int totDistance, String diffic,User user, float carga,String modal){
         this.start=start;
         this.end=end;
         this.diffic=diffic;
@@ -32,12 +32,21 @@ public class Record implements Serializable{
         this.avgSpd=avgSpd;
         this.accumSub=accumSub;
         this.accumDesc=accumDesc;
+        this.totDistance=totDistance;
         this.date=new GregorianCalendar();
         this.currSpeed=currSpeed;
     }
 
     public GregorianCalendar getDate() {
         return date;
+    }
+
+    public int getTotDistance(){
+        return totDistance;
+    }
+
+    public void setTotDistance(int totDist){
+        totDistance=totDist;
     }
 
     public float getAvgSpd() {
@@ -197,6 +206,7 @@ public class Record implements Serializable{
         res+=avgSpd+", ";
         res+=accumSub+", ";
         res+=accumDesc+", ";
+        res+=totDistance+", ";
         res+=modal+", ";
         res+=carga+", ";
         res+=diffic+"\n";

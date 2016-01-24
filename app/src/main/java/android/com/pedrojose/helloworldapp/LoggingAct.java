@@ -78,7 +78,17 @@ public class LoggingAct extends Activity {
             fw.close();
         }
         else {
-
+            File folder = new File(getFilesDir()
+                    +File.separator +"dadosLogging");
+            boolean var = false;
+            if (!folder.exists())
+                var = folder.mkdir();
+            final String filename = folder.toString() + File.separator + this.mapa.getFirstRecord().simpleTextDateTime() + this.mapa.getFirstRecord().getUser().getName().replaceAll(" ", "") + ".csv";
+            FileWriter fw = new FileWriter(filename);
+            for (String str : list)
+                fw.write(str);
+            fw.flush();
+            fw.close();
         }
     }
     public void updateLatLonAl(double lat, double lon, double al){
