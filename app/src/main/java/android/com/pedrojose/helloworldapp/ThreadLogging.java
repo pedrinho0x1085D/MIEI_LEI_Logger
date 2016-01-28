@@ -44,7 +44,8 @@ public class ThreadLogging implements LocationListener {
         if (pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS)) {
 
             if (ActivityCompat.checkSelfPermission(this.loggingAct, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.loggingAct, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationManager.requestLocationUpdates(provider, 4500, 1, this); /*E NECESSARIO REVER ESTE PONTO!!! TALVEZ MAIS METROS SENÃO 1 LEITURA/METRO = KILL!!*/
+                locationManager.requestLocationUpdates(provider, 4500, 3, this);
+                /*E NECESSARIO REVER ESTE PONTO!!! TALVEZ MAIS METROS SENÃO 1 LEITURA/METRO = BATERIA KILL!!*/
             } else {
                 Toast.makeText(this.loggingAct, "Reveja condições de permissão", Toast.LENGTH_SHORT).show();
             }
